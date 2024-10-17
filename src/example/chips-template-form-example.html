@@ -23,7 +23,7 @@
 <section>
   <ul>
     @for (person of people$ | async; track person) {
-      <li>person</li>
+      <li>{{person.name}}</li>
     }
   </ul>
 </section>
