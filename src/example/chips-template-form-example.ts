@@ -1,10 +1,12 @@
 import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, inject, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import { StarWarsService } from './star-wars.service';
+import { Observable } from 'rxjs';
 
 /**
  * @title Chips in template-driven forms
@@ -16,11 +18,21 @@ import {MatIconModule} from '@angular/material/icon';
   standalone: true,
   imports: [MatButtonModule, MatFormFieldModule, MatChipsModule, FormsModule, MatIconModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [StarWarsService]
 })
-export class ChipsTemplateFormExample {
+export class ChipsTemplateFormExample implements OnInit {
+  
   readonly templateKeywords = signal(['angular', 'how-to', 'tutorial', 'accessibility']);
 
+  people$: Observable<any[]>;
+
   announcer = inject(LiveAnnouncer);
+  starWarsService = inject(StarWarsService);
+
+  ngOnInit(): void {
+    this.people$ = this.starWarsService.getPeople();
+  }
+
 
   removeTemplateKeyword(keyword: string) {
     this.templateKeywords.update(keywords => {
