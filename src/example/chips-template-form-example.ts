@@ -22,9 +22,6 @@ import { AsyncPipe } from '@angular/common';
   providers: [StarWarsService]
 })
 export class ChipsTemplateFormExample implements OnInit {
-  
-  readonly templateKeywords = signal(['angular', 'how-to', 'tutorial', 'accessibility']);
-
   people$: Observable<any[]>;
 
   announcer = inject(LiveAnnouncer);
@@ -32,33 +29,6 @@ export class ChipsTemplateFormExample implements OnInit {
 
   ngOnInit(): void {
     this.people$ = this.starWarsService.getPeople();
-  }
-
-
-  removeTemplateKeyword(keyword: string) {
-    this.templateKeywords.update(keywords => {
-      const index = keywords.indexOf(keyword);
-      if (index < 0) {
-        return keywords;
-      }
-
-      keywords.splice(index, 1);
-      this.announcer.announce(`removed ${keyword} from template form`);
-      return [...keywords];
-    });
-  }
-
-  addTemplateKeyword(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    // Add our keyword
-    if (value) {
-      this.templateKeywords.update(keywords => [...keywords, value]);
-      this.announcer.announce(`added ${value} to template form`);
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
   }
 }
 
