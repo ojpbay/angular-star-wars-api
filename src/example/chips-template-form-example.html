@@ -22,7 +22,7 @@
 
 <section>
   <ul>
-    @for (person of people$ | async) {
+    @for (person of people$ | async; track person) {
       <li>person</li>
     }
   </ul>

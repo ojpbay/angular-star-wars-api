@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { StarWarsService } from './star-wars.service';
 import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 /**
  * @title Chips in template-driven forms
@@ -16,7 +17,7 @@ import { Observable } from 'rxjs';
   templateUrl: 'chips-template-form-example.html',
   styleUrl: 'chips-template-form-example.css',
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatChipsModule, FormsModule, MatIconModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatChipsModule, FormsModule, MatIconModule, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [StarWarsService]
 })
